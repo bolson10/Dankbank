@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "131760532591",
+    "firebase_url": "https://dankbankmobile.firebaseio.com",
+    "project_id": "dankbankmobile",
+    "storage_bucket": "dankbankmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131760532591:android:d055fb66415dce4496719a",
+        "android_client_info": {
+          "package_name": "com.dankbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131760532591-locv0gb7vbv5v7p0pm64951mmu2js4nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dankbank",
+            "certificate_hash": "23d04e684ead1e37f341096836c7652cc6a465fa"
+          }
+        },
+        {
+          "client_id": "131760532591-k2sr7baqopcn8q6u82cf3kocuq7s2ej2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqSYxfo9hX8dg3pAbsQobaMTl21fFUwOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131760532591-k2sr7baqopcn8q6u82cf3kocuq7s2ej2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
