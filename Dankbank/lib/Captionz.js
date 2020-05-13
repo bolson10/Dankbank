@@ -128,6 +128,16 @@ comment: comment
 }
 
 FavoriteComment(it) {
+ firestore()
+    .collection(auth().currentUser.uid + 'likedcomments')
+    .doc()
+    .set({
+     url : it.url,
+     comment: it.comment,
+     author: it.author
+    });
+
+  
 firestore().collection('comments').where('comment', '==',it.comment).get()
 .then(querySnapshot => {
   //  console.log('Total users: ', querySnapshot.size);
@@ -143,8 +153,12 @@ firestore().collection('comments').where('comment', '==',it.comment).get()
             likes: x
           });
         }
+//var x = this.state.commentfavorites;
+//console.log(x);
+
     //    console.log("current likes:",documentSnapshot.data().likes);
       });
+//console.log(this.state.commentfavorites);
       }
   });
 }
@@ -177,6 +191,23 @@ firestore().collection('comments').where('comment', '==',it.comment).get()
   //      firebase.auth().onAuthStateChanged(user => {
  //     this.props.navigation.navigate(user ? 'Home' : 'SignUp')
 //    })
+//console.log("the current liked comments are: ",this.state.commentfavorites);
+firestore().collection(auth().currentUser.uid + 'likedcomments').onSnapshot((querySnapshot) => {
+  const cmmts = []; 
+  querySnapshot.forEach((doc) => {
+    cmmts.push({
+        url: doc.data().url,
+        comment: doc.data().comment,
+        author: doc.data().author,
+    });
+  });
+  this.setState({
+    commentfavorites: cmmts
+  });
+console.log('current comment favorites:', this.state.commentfavorites)
+ });
+
+
 firestore().collection(auth().currentUser.uid).onSnapshot((querySnapshot) => {
   const urls = []; 
   querySnapshot.forEach((doc) => {
@@ -224,6 +255,11 @@ firestore().collection('comments').onSnapshot((querySnapshot) => {
    
   render() {
     return (
+      <View>
+        <Button
+        title = "Enter Chat"
+        onPress = {() => this.props.navigation.navigate('Chat')} 
+        />
         <FlatList
         data={this.state.data} 
         renderItem={({item})=> 
@@ -245,7 +281,10 @@ firestore().collection('comments').onSnapshot((querySnapshot) => {
         renderItem={({item})=> 
         <View style={{flexDirection: "row" }}>
         <Text> {item.author}:   {item.comment}   </Text>
-        <Icon size={30} name={'ios-heart-empty'} onPress ={this.FavoriteComment.bind(this,item)} />
+        { !this.state.commentfavorites.includes(item.comment) ? 
+        <Icon size={30} name={'ios-heart-empty'} onPress ={this.FavoriteComment.bind(this,item)} /> :
+        <Icon size={30} name={'ios-heart'} onPress ={this.FavoriteComment.bind(this,item)} />  
+        }
         <Text>  {item.likes} </Text>
        </View>
       }
@@ -258,9 +297,10 @@ firestore().collection('comments').onSnapshot((querySnapshot) => {
        }
         keyExtractor={(item, index) => index.toString() }
       />
+    </View>
     );
   }
-}
+} 
  
 const styles = StyleSheet.create({
   container: {

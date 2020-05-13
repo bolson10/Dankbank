@@ -40,9 +40,10 @@ import Search from './Search'
 import Home from './Home'
 import SignUp from './SignUp'
 import Login from './Login'
+import Chat from './Chat'
 import Captionz from './Captionz'
 
-const HomeStack = createSwitchNavigator({
+const HomeStack = createStackNavigator({
   Home: Home, 
   Login: {
       screen: Login,
@@ -60,6 +61,10 @@ const HomeStack = createSwitchNavigator({
          },
 });
 
+const CaptionzStack = createStackNavigator({
+  Captionz: Captionz,
+  Chat: Chat, 
+});
 
 const TabNavigator = createMaterialBottomTabNavigator(
   {
@@ -104,7 +109,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
       }
     },
     Captionz: {
-      screen: Captionz,
+      screen: CaptionzStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <View>
